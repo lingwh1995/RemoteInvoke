@@ -67,4 +67,8 @@ public class Client {
        System.out.println(result);
    }
 
+   @Test
+   public void test(){
+       //final SoapResponseDirector instance = GenericsFactory.init().getInstance(SoapResponseDirector.class, new UrlSoapResponseBuilder());
+   }
 }

@@ -125,6 +125,16 @@ public class GlobalParamsBuilder {
         return this;
     }
 
+    /**
+     * 回收ThreadLocal占用的内存防止内存泄漏和内存溢出
+     */
+    public void garbageCollection(){
+        soapMessageThreadLocal.remove();
+        requestSourceThreadLocal.remove();
+        targetMethodNameThreadLocal.remove();
+        requestMethodParamsThreadLocal.remove();
+    }
+
     @Override
     public String toString() {
         return "GlobalParamsBuilder{" +

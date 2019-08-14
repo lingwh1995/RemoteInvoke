@@ -57,10 +57,14 @@ public abstract class AbstractSoapResponseBuilder {
 
     /**
      * 从全局参数构建者中获取Soap请求响应报文
+     *      注意:获取到最终构建结果之后要进行垃圾回收操作，防止内存泄漏和内存益处
      * @return 返回值为构建好的响应报文
      */
     protected String build(){
-        return GLOBAL_PARAMS_BUILDER.getSoapMessage();
+        final String soapMessage = GLOBAL_PARAMS_BUILDER.getSoapMessage();
+        //回收ThreadLocal占用的内存
+        GLOBAL_PARAMS_BUILDER.garbageCollection();
+        return soapMessage;
     }
 
 }

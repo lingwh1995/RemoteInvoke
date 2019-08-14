@@ -24,7 +24,7 @@ public class SoapUtils {
      */
     public static String getSoapResponseMessageByUrl(String wsdlUrl,String targetMethodName){
         //指挥者:SoapResponseDirector,具体的构建者是:UrlSoapResponseBuilder
-        SoapResponseDirector soapResponseDirector = new SoapResponseDirector(URL_SOAP_RESPONSE_BUILDER);
+        final SoapResponseDirector soapResponseDirector = GenericsFactory.init().getInstanceWithAbstractConstructorParam(SoapResponseDirector.class, URL_SOAP_RESPONSE_BUILDER);
         //注意:如果此种构建者无法满足需求，请继承AbstractSoapResponseBuilder,来进行扩展
         return soapResponseDirector.buildSoapResponseMessage(wsdlUrl, targetMethodName);
     }
@@ -39,7 +39,7 @@ public class SoapUtils {
      */
     public static String getSoapResponseMessageByUrl(String wsdlUrl,String targetMethodName,Map<String,String> buildSoapRequestMessage){
         //指挥者:SoapResponseDirector,具体的构建者是:UrlSoapResponseBuilder
-        SoapResponseDirector soapResponseDirector = new SoapResponseDirector(URL_SOAP_RESPONSE_BUILDER);
+        final SoapResponseDirector soapResponseDirector = GenericsFactory.init().getInstanceWithAbstractConstructorParam(SoapResponseDirector.class, URL_SOAP_RESPONSE_BUILDER);
         //注意:如果此种构建者无法满足需求，请继承AbstractSoapResponseBuilder,来进行扩展
         return soapResponseDirector.buildSoapResponseMessage(wsdlUrl, targetMethodName,buildSoapRequestMessage);
     }
@@ -53,7 +53,7 @@ public class SoapUtils {
      */
     public static String getSoapResponseMessageByText(String wsdlText,String targetMethodName,Map<String,String> buildSoapRequestMessage){
         //指挥者:SoapResponseDirector,具体的构建者是:TextSoapResponseBuilder
-        SoapResponseDirector soapResponseDirector = new SoapResponseDirector(TEXT_SOAP_RESPONSE_BUILDER);
+        final SoapResponseDirector soapResponseDirector = GenericsFactory.init().getInstanceWithAbstractConstructorParam(SoapResponseDirector.class, TEXT_SOAP_RESPONSE_BUILDER);
         //注意:如果此种构建者无法满足需求，请继承AbstractSoapResponseBuilder,来进行扩展
         return soapResponseDirector.buildSoapResponseMessage(wsdlText, targetMethodName,buildSoapRequestMessage);
     }
@@ -67,7 +67,7 @@ public class SoapUtils {
      */
     public static String getSoapResponseMessageByText(String wsdlText,String targetMethodName){
         //指挥者:SoapResponseDirector,具体的构建者是:TextSoapResponseBuilder
-        SoapResponseDirector soapResponseDirector = new SoapResponseDirector(TEXT_SOAP_RESPONSE_BUILDER);
+        final SoapResponseDirector soapResponseDirector = GenericsFactory.init().getInstanceWithAbstractConstructorParam(SoapResponseDirector.class, TEXT_SOAP_RESPONSE_BUILDER);
         //注意:如果此种构建者无法满足需求，请继承AbstractSoapResponseBuilder,来进行扩展
         return soapResponseDirector.buildSoapResponseMessage(wsdlText, targetMethodName);
     }

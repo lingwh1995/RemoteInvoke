@@ -24,7 +24,7 @@ public class BasicSoapResponseBuilder extends AbstractSoapResponseBuilder{
         final String methodName = GLOBAL_PARAMS_BUILDER.getMethodName();
         try {
             //使用享元工厂的客户端，获取到享元，每一个享元中的内部对象就是wsdl文档包含的信息
-            WsdlOperationFlyweightFactory wsdlOperationFlyweightFactory = WsdlOperationFlyweightFactory.getInstance();
+            final WsdlOperationFlyweightFactory wsdlOperationFlyweightFactory = GenericsFactory.init().getInstance(WsdlOperationFlyweightFactory.class);
             Flyweight wsdlOperation = wsdlOperationFlyweightFactory.getWsdlOperation(requestSource,methodName);
             //更新全局参数构建者中的soapMessage参数的值，使其的值为替换为参数的请求报文
             GLOBAL_PARAMS_BUILDER.soapMessage(wsdlOperation.getSoapRequestMessage());

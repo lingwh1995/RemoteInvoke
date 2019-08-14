@@ -17,21 +17,21 @@ import java.util.Map;
  */
 public class WsdlOperationFlyweightFactory {
 
-    /**饿汉式*/
-    private static final WsdlOperationFlyweightFactory flyweightFactory = new WsdlOperationFlyweightFactory();
-
-    /**
-     * 私有化享元工厂
-     */
-    private WsdlOperationFlyweightFactory(){}
-
-    /**
-     * 获取单例的享元工厂实例
-     * @return
-     */
-    public static WsdlOperationFlyweightFactory getInstance(){
-        return flyweightFactory;
-    }
+//    /**饿汉式*/
+//    private static final WsdlOperationFlyweightFactory flyweightFactory = new WsdlOperationFlyweightFactory();
+//
+//    /**
+//     * 私有化享元工厂
+//     */
+//    private WsdlOperationFlyweightFactory(){}
+//
+//    /**
+//     * 获取单例的享元工厂实例
+//     * @return
+//     */
+//    public static WsdlOperationFlyweightFactory getInstance(){
+//        return flyweightFactory;
+//    }
 
     /**存放WsdlOperation享元池*/
     private Map<String,Flyweight> wsdlOperationPool = new HashMap<String,Flyweight>();
@@ -61,7 +61,7 @@ public class WsdlOperationFlyweightFactory {
                 //拼接key
                 WsdlOperation wsdlOperation = (WsdlOperation) operation;
                 String index =  wsdlUrl + wsdlOperation.getName();
-                Flyweight element = new WsdlOperationFlyweight(wsdlOperation);
+                Flyweight element = GenericsFactory.init().getPrototypeInstance(WsdlOperationFlyweight.class,wsdlOperation);
                 wsdlOperationPool.put(index,element);
                 //返回目标享元对象
                 if(key.equals(index)){

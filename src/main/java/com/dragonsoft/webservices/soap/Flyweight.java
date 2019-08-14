@@ -2,9 +2,9 @@ package com.dragonsoft.webservices.soap;
 
 /**
  * 享元接口
- * author ronin
+ * @author ronin
  * @version V1.0
- * @since 2019/8/12 13:22
+ * @since 2019/8/14 14:32
  */
 public interface Flyweight {
 

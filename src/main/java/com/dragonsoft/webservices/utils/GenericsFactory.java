@@ -1,4 +1,4 @@
-package com.dragonsoft.webservices.soap;
+package com.dragonsoft.webservices.utils;
 
 
 import java.lang.reflect.Constructor;

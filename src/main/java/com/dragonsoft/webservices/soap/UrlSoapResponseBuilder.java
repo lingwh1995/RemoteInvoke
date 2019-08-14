@@ -1,5 +1,7 @@
 package com.dragonsoft.webservices.soap;
 
+import com.dragonsoft.webservices.utils.GenericsFactory;
+
 /**
  * 根据wsdlurl来构造Soap协议请求报文,返回的响应结果就是响应报文的格式，如果此构建者不符合要求，请
  *  AbstractSoapResponseBuilder，添加一个新的构建者

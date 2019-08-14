@@ -1,5 +1,6 @@
 package com.dragonsoft.webservices.soap;
 
+import com.dragonsoft.webservices.utils.GenericsFactory;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.WsdlProject;

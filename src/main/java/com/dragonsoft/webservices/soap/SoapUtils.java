@@ -1,5 +1,7 @@
 package com.dragonsoft.webservices.soap;
 
+import com.dragonsoft.webservices.utils.GenericsFactory;
+
 import java.util.Map;
 
 /**

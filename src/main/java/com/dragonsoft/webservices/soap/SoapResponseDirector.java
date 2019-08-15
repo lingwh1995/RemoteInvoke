@@ -3,25 +3,35 @@ package com.dragonsoft.webservices.soap;
 import java.util.Map;
 
 /**
- * 基础构建行为的指挥者，此指挥者指挥基础构建者完成构建行为
+ * 指挥者:指挥具体的构建者完成构建
  * @author ronin
  * @version V1.0
  * @since 2019/8/13 13:17
  */
 public class SoapResponseDirector {
+
+    /**私有化构造需要使用时从工厂中获取此类实例*/
+    private SoapResponseDirector(){
+        throw new UnsupportedOperationException();
+    }
+
     /**持有一个具体构建者的引用*/
     private AbstractSoapResponseBuilder concreteSoapResponseBuilder;
 
+    /**
+     * 有参构造
+     * @param soapResponseBuilder 具体的构建者
+     */
     public SoapResponseDirector(AbstractSoapResponseBuilder soapResponseBuilder) {
         this.concreteSoapResponseBuilder = soapResponseBuilder;
     }
 
     /**
-     * 构建响应报由指挥者决定:当方法有参数时调用这个构建行为
-     * @param requestSource webservice接口发布方提供的wsdlUrl或者wsdl格式的文本
-     * @param targetMethodName webservice服务提供的接口对应的目标的方法名称
-     * @param requestMethodParams webservice服务提供的接口对应的具体的方法需要的参数，此处为map,map的key是请求的形参的值，value为实参的值,实参值不区分大小写
-     * @return
+     * 当webservices服务提供方发布目标方法有参数时调用这个构建行为
+     * @param requestSource webservices接口发布方提供的WSDL或者wsdl格式的文本
+     * @param targetMethodName webservices服务提供的接口对应的目标的方法名称
+     * @param requestMethodParams webservices服务提供的接口对应的具体的方法需要的参数，此处为map,map的key是请求的形参的值，value为实参的值,实参值不区分大小写
+     * @return 返回值为构建好的请求报文
      */
     public String buildSoapResponseMessage(String requestSource,String targetMethodName,Map<String,String> requestMethodParams){
         //第一步:注册并预处理参数
@@ -36,10 +46,11 @@ public class SoapResponseDirector {
     }
 
     /**
-     * 构建响应报由指挥者决定:当方法没有参数时调用这个构建行为
-     * @param requestSource webservice接口发布方提供的wsdlUrl或者wsdl格式的文本
-     * @param targetMethodName webservice服务提供的接口对应的目标的方法名称
-     * @return
+     * {@link SoapResponseDirector#buildSoapResponseMessage(String, String, Map)}的重载方法
+     * 当webservices服务发布方提供方发布目标方法不需要参数时调用这个构建行为
+     * @param requestSource webservices服务发布方提供的WSDL或者wsdl格式的文本
+     * @param targetMethodName webservices服务发布方提供的接口对应的方法
+     * @return 返回值为构建好的请求报文
      */
     public String buildSoapResponseMessage(String requestSource,String targetMethodName){
         //第一步:注册并预处理参数

@@ -12,17 +12,16 @@ public class UnSharedFlyweight implements Flyweight {
     private String tipsMessage ;
 
     /**
-     * @param wsdlUrl webservice接口发布方提供的wsdlUrl
-     * @param methodName webservice接口中提供的方法的名称
+     * @param wsdlUrl webservices接口发布方提供的WSDL
+     * @param methodName webservices发布方提供的方法的接口对应的方法名
      */
     public UnSharedFlyweight(String wsdlUrl, String methodName) {
         tipsMessage = "wsdlUrl:"+wsdlUrl+",methodName:"+methodName+"享元池中存放了该wsdlUrl对应的所有方法，但是这些方法里面没有和方法名为methodName对应的方法";
     }
 
     /**
-     * 获取soap协议格式的请求报文
-     *
-     * @return
+     * 获取soap协议格式的请求报文，此处会返回一个提示信息
+     * @return 返回值为提示信息
      */
     @Override
     public String getSoapRequestMessage() {

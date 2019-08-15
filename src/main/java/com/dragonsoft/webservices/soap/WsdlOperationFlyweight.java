@@ -10,6 +10,11 @@ import com.eviware.soapui.impl.wsdl.WsdlOperation;
  */
 public class WsdlOperationFlyweight implements Flyweight {
 
+    /**私有化构造，需要此对象时从泛型工厂获取*/
+    private WsdlOperationFlyweight(){
+        throw new UnsupportedOperationException();
+    }
+
     /**内部状态:即需要被共享的元对象*/
     protected WsdlOperation wsdlOperation;
 
@@ -23,8 +28,7 @@ public class WsdlOperationFlyweight implements Flyweight {
 
     /**
      * 获取soap协议格式的请求报文
-     *
-     * @return
+     * @return 返回值为原始的请求报文
      */
     @Override
     public String getSoapRequestMessage() {

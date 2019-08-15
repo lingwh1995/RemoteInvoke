@@ -18,7 +18,7 @@ public class TextSoapResponseBuilder extends AbstractSoapResponseBuilder {
     private static final GlobalParamsBuilder GLOBAL_PARAMS_BUILDER = GenericsFactory.init().getInstance(GlobalParamsBuilder.class);
 
     /**
-     * 此步骤操作后会获取到请求报文,但是并不会替换对应的参数
+     * 构建原始请求报文
      */
     @Override
     public void buildSoapRequestMessage() {
@@ -26,7 +26,7 @@ public class TextSoapResponseBuilder extends AbstractSoapResponseBuilder {
     }
 
     /**
-     * 此步骤操作后会对请求报文做一个处理,会替换请求报文中对应的参数
+     * 将原始请求报文中的占位符替换为实际的值
      */
     @Override
     public void buildDealedSoapRequestMessage() {
@@ -35,7 +35,7 @@ public class TextSoapResponseBuilder extends AbstractSoapResponseBuilder {
     }
 
     /**
-     * 此步骤操作后会构建响应报文
+     * 根据请求报文构建响应报文
      * @return
      */
     @Override

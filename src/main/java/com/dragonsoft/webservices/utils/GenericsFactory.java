@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 泛型工厂:根据不同的Class对象创建不同的单例对象
+ * 泛型工厂:根据不同的Class对象创建不同的对象，包括单例对象和非单例对象
  * @author ronin
  * @version V1.0
  * @since 2019/8/14 14:32
@@ -35,15 +35,13 @@ public class GenericsFactory {
 
     /**
      * 根据传入Class的对象的不同创建不同的单例对象
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param clazz 目标对象的Class对象
+     * @param <T> 与clazz代表的类型相同
+     * @return 返回clazz对应的类型的单例实例
      */
     public <T> T getInstance(Class clazz){
         T target = null;
         try {
-            Constructor declaredConstructor = clazz.getDeclaredConstructor(null);
-            declaredConstructor.setAccessible(true);
             if(!SINGLETON_OBJECT_POOL.containsKey(clazz.getSimpleName())){
                 target = (T)clazz.newInstance() ;
                 SINGLETON_OBJECT_POOL.put(clazz.getSimpleName(),target);
@@ -54,12 +52,17 @@ public class GenericsFactory {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
         }
         return target;
     }
 
+    /**
+     * 根据传入Class的对象的不同创建不同的单例对象和构造参数object的不同创建不同的单例对象
+     * @param clazz 目标对象的Class对象
+     * @param object 创建目标对象需要的构造参数
+     * @param <T> 与clazz代表的类型相同
+     * @return 返回clazz对应的类型的单例实例
+     */
     public <T> T getInstanceWithAbstractConstructorParam(Class clazz,Object object){
         T target = null;
         try {
@@ -83,6 +86,13 @@ public class GenericsFactory {
         return target;
     }
 
+    /**
+     * 根据传入Class的对象的不同创建不同的单例对象和构造参数object的不同创建不同的多例对象
+     * @param clazz 目标对象的Class对象
+     * @param object 创建目标对象需要的构造参数
+     * @param <T> 与clazz代表的类型相同
+     * @return 返回clazz对应的类型的多例实例
+     */
     public <T> T getPrototypeInstance(Class clazz,Object object){
         T target = null;
         try {

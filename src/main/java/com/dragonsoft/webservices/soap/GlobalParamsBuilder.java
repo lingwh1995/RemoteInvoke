@@ -48,13 +48,13 @@ public class GlobalParamsBuilder {
      */
     private ThreadLocal<String> soapMessageThreadLocal = new ThreadLocal<String>();
 
-    /**和当前线程绑定的 请求源:wsdlurl或者wsdl格式的文本*/
+    /**和当前线程绑定的 请求源:webservice服务发布方提供的WSDL或者wsdl格式的文本*/
     private ThreadLocal<String> requestSourceThreadLocal = new ThreadLocal<String>();
 
     /**和当前线程绑定的 方法名称*/
     private ThreadLocal<String> targetMethodNameThreadLocal = new ThreadLocal<String>();
 
-    /**和当前线程绑定的 方法需要的参数*/
+    /**和当前线程绑定的 目标方法需要的参数*/
     private ThreadLocal<Map<String,String>> requestMethodParamsThreadLocal = new ThreadLocal<Map<String,String>>();
 
     /**
@@ -74,7 +74,7 @@ public class GlobalParamsBuilder {
     /**
      * 全局参数methodName外部访问接口
      */
-    public String getMethodName() {
+    public String getTargetMethodName() {
         return targetMethodNameThreadLocal.get();
     }
 

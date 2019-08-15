@@ -13,7 +13,7 @@ import org.apache.http.util.EntityUtils;
 import java.nio.charset.Charset;
 
 /**
- * 使用HttpClient工具类发送Soap请求
+ * 基于HttpClient发送Soap请求的工具类
  * @author ronin
  * @version V1.0
  * @since 2019/8/13 10:53
@@ -34,16 +34,16 @@ public class HttpClientUtils {
 
     /**
      * 使用HttpClient发送Soap请求
-     * @param postUrl
-     * @param soapMessage
-     * @return
+     * @param targetUrl webservices服务方提供的wsdlurl
+     * @param soapMessage 原始的请求报文
+     * @return 返回soap协议格式的响应报文
      */
-    public static String sendSoapRequest(String postUrl, String soapMessage) {
+    public static String sendSoapRequest(String targetUrl, String soapMessage) {
         //soap请求响应报文
         String soapResponseMessage = "";
         //创建HttpClientBuilder,并是利用HttpClientBuilder构建HttpClient对象
         CloseableHttpClient closeableHttpClient = HttpClientBuilder.create().build();
-        HttpPost httpPost = new HttpPost(postUrl);
+        HttpPost httpPost = new HttpPost(targetUrl);
         //设置请求和传输超时时间
         RequestConfig requestConfig = RequestConfig.custom()
                 .setSocketTimeout(DEFAULT_SOCKET_TIMEOUT)

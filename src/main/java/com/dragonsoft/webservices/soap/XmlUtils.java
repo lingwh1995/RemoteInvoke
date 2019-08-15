@@ -34,7 +34,7 @@ public class XmlUtils {
      * 把一段请求报文转换成一个文档对象,并注册资源
      * @param src soap协议格式的请求报文
      */
-    public static void register(String src) {
+    public static void transform(String src) {
         try {
             logger.info("原始的请求报文:\n"+src);
             document = DocumentHelper.parseText(src);
@@ -46,7 +46,7 @@ public class XmlUtils {
     /**
      * 格式化xml文本
      * @param xmlText
-     * @return
+     * @return 返回格式化的soap协议格式的xml文本
      */
     public static String transformXmlToFormatText(String xmlText){
         XMLWriter writer = null;
@@ -84,7 +84,7 @@ public class XmlUtils {
 
     /**
      * 获取根节点
-     * @return
+     * @return 返回该xml对应的Document对象的根节点
      */
     public static Element getRootElement(){
         return document.getRootElement();
@@ -92,34 +92,37 @@ public class XmlUtils {
 
 
     /**
-     * 根据形参的名称设置对应的实参的值
+     * 将参数设置到请求报文中
+     * @param targetMethodName webservices发布方提供的接口的方法名
+     * @param requestMethodParams webservices发布方提供的接口的方法需要的参数
+     * @return 返回值为设置好参数的请求报文
      */
-    public static String setMethodParamValue(String methodName, Map<String,String> params){
+    public static String setMethodParamValue(String targetMethodName, Map<String,String> requestMethodParams){
         //获取body节点
         Element soapBody = getRootElement().element("Body");
         //获取body节点下指定节点
-        Element methodNode = soapBody.element(methodName);
-        //如果通过方法名去查找指定的节点，查询不到，说明webservice中没有提供该方法,程序终止执行
+        Element methodNode = soapBody.element(targetMethodName);
+        //如果通过方法名去查找指定的节点，查询不到，说明webservices中没有提供该方法,程序终止执行
         if(null == methodNode){
-            throw new IllegalArgumentException("无法根据方法名"+methodName+"查询到对应的服务");
+            throw new IllegalArgumentException("无法根据方法名"+targetMethodName+"查询到对应的服务");
         }
         //获取该方法下所有的子节点，每一个子节点代表一个参数
         List<Element> paramsNodes = methodNode.elements();
-        int weserviceParamCount = 0;
+        int webservicesParamCount = 0;
         for (Element element : paramsNodes) {
-            //webservice服务中提供的形参名称
+            //webservices服务中提供的形参名称
             String serviceParamName = element.getName();
-            if(params.containsKey(serviceParamName)){
-                element.setText(params.get(serviceParamName));
-                weserviceParamCount++;
+            if(requestMethodParams.containsKey(serviceParamName)){
+                element.setText(requestMethodParams.get(serviceParamName));
+                webservicesParamCount++;
             }
         }
-        logger.info("webservice提供的服务中,方法methodName需要"+weserviceParamCount+"个参数,实际传入了:"+params.size()+"个参数详情如下:");
-        Set<String> keys = params.keySet();
+        logger.info("webservices提供的服务中,方法methodName需要"+webservicesParamCount+"个参数,实际传入了:"+requestMethodParams.size()+"个参数详情如下:");
+        Set<String> keys = requestMethodParams.keySet();
         Iterator<String> iterator = keys.iterator();
         while(iterator.hasNext()){
             String key = iterator.next();
-            String value = params.get(key);
+            String value = requestMethodParams.get(key);
             logger.info("传入的参数，key:"+key+",value:"+value);
         }
         //替换过参数后的请求报文

@@ -1,5 +1,6 @@
-package com.dragonsoft.webservices.soap;
+package com.dragonsoft.webservices.client;
 
+import com.dragonsoft.webservices.soap.SoapUtils;
 import org.junit.Test;
 
 import java.util.HashMap;

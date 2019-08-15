@@ -9,17 +9,17 @@ import java.util.Map;
  * <pre>
  *  基础的Soap协议格式的响应报文构建者:
  *      此构建者主要完成三个操作:
- *          1.根据webervices服务发布方提供的WSDL构建请求报文 {@link BasicSoapResponseBuilder#buildSoapRequestMessage}
- *          2.替换请求报文中的参数 {@link BasicSoapResponseBuilder#buildDealedSoapRequestMessage}
- *          3.根据请求报文构建响应报文 {@link BasicSoapResponseBuilder#buildSoapResponseMessage}
+ *          1.根据webervices服务发布方提供的WSDL构建请求报文 {@link BasicSoapResponseBuilder#buildSoapRequestMessage()}
+ *          2.替换请求报文中的参数 {@link BasicSoapResponseBuilder#buildDealedSoapRequestMessage()}
+ *          3.根据请求报文构建响应报文 {@link BasicSoapResponseBuilder#buildSoapResponseMessage()}
  *      作用:
  *          基础响应报文构建者中提供的三个方法，在其他构建者适用的情况下可以直接调用此构建者中方法完成相关操作
  *          1.调用基础构建者中构建请求报文的方法
- *              eg:{@link UrlSoapResponseBuilder#buildSoapRequestMessage}
+ *              eg:{@link UrlSoapResponseBuilder#buildSoapRequestMessage()}
  *          2.调用基础构建者中替换请求报文中的参数的方法
- *              eg:{@link UrlSoapResponseBuilder#buildDealedSoapRequestMessage}
+ *              eg:{@link UrlSoapResponseBuilder#buildDealedSoapRequestMessage()}
  *          3.调用基础构建者中根据请求报文构建响应报文方法
- *              eg:{@link UrlSoapResponseBuilder#buildSoapResponseMessage}
+ *              eg:{@link UrlSoapResponseBuilder#buildSoapResponseMessage()}
  * <pre/>
  *
  * @author ronin

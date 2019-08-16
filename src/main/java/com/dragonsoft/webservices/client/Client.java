@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.HashMap;
 
 /**
- * maven打包注意事项:mvn assembly:assembly，否则所pom.xml依赖的第三方jar是不会被包含的
  * @author ronin
  * @version V1.0
  * @since 2019/8/12 15:06

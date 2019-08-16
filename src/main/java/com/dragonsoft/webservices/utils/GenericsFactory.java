@@ -39,7 +39,7 @@ public class GenericsFactory {
      * @param <T> 与clazz代表的类型相同
      * @return 返回clazz对应的类型的单例实例
      */
-    public <T> T getInstance(Class clazz){
+    public <T> T getInstance(Class<T> clazz){
         T target = null;
         try {
             if(!SINGLETON_OBJECT_POOL.containsKey(clazz.getSimpleName())){
@@ -63,7 +63,7 @@ public class GenericsFactory {
      * @param <T> 与clazz代表的类型相同
      * @return 返回clazz对应的类型的单例实例
      */
-    public <T> T getInstanceWithAbstractConstructorParam(Class clazz,Object object){
+    public <T> T getInstanceWithAbstractConstructorParam(Class<T> clazz,Object object){
         T target = null;
         try {
             Constructor constructor = clazz.getConstructor(new Class[]{object.getClass().getSuperclass()});
@@ -93,7 +93,7 @@ public class GenericsFactory {
      * @param <T> 与clazz代表的类型相同
      * @return 返回clazz对应的类型的多例实例
      */
-    public <T> T getPrototypeInstance(Class clazz,Object object){
+    public <T> T getPrototypeInstance(Class<T> clazz,Object object){
         T target = null;
         try {
             Constructor constructor = clazz.getConstructor(new Class[]{object.getClass()});

@@ -1,5 +1,7 @@
 package com.dragonsoft.webservices.soap;
 
+import com.dragonsoft.webservices.utils.GenericsFactory;
+
 import java.util.Map;
 
 /**
@@ -9,6 +11,9 @@ import java.util.Map;
  * @since 2019/8/13 13:17
  */
 public class SoapResponseDirector {
+
+    /**从泛型工厂中获取单例的全局参数构建者*/
+    private static final GlobalParamsBuilder GLOBAL_PARAMS_BUILDER = GenericsFactory.init().getInstance(GlobalParamsBuilder.class);
 
     /**私有化构造需要使用时从工厂中获取此类实例*/
     private SoapResponseDirector(){
@@ -34,15 +39,24 @@ public class SoapResponseDirector {
      * @return 返回值为构建好的请求报文
      */
     public String buildSoapResponseMessage(String requestSource,String targetMethodName,Map<String,String> requestMethodParams){
-        //第一步:注册并预处理参数
-        concreteSoapResponseBuilder.registerGlobalParams(requestSource,targetMethodName,requestMethodParams);
-        //第二步:获取请求报文
-        concreteSoapResponseBuilder.buildSoapRequestMessage();
-        //第三步:将请求报文中的?替换为实际传入的参数
-        concreteSoapResponseBuilder.buildDealedSoapRequestMessage();
-        //第四步:根据前两步操作获取到的请求参数报文，发送soap请求，从而得到响应报文
-        concreteSoapResponseBuilder.buildSoapResponseMessage();
-        return concreteSoapResponseBuilder.build();
+        String soapResponseMessage = "";
+        try {
+            //第一步:注册并预处理参数
+            concreteSoapResponseBuilder.registerGlobalParams(requestSource,targetMethodName,requestMethodParams);
+            //第二步:获取请求报文
+            concreteSoapResponseBuilder.buildSoapRequestMessage();
+            //第三步:将请求报文中的?替换为实际传入的参数
+            concreteSoapResponseBuilder.buildDealedSoapRequestMessage();
+            //第四步:根据前两步操作获取到的请求参数报文，发送soap请求，从而得到响应报文
+            concreteSoapResponseBuilder.buildSoapResponseMessage();
+            soapResponseMessage = concreteSoapResponseBuilder.build();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            //回收ThreadLocal占用的内存
+            GLOBAL_PARAMS_BUILDER.garbageCollection();
+        }
+        return soapResponseMessage;
     }
 
     /**
@@ -53,12 +67,21 @@ public class SoapResponseDirector {
      * @return 返回值为构建好的请求报文
      */
     public String buildSoapResponseMessage(String requestSource,String targetMethodName){
-        //第一步:注册并预处理参数
-        concreteSoapResponseBuilder.registerGlobalParams(requestSource,targetMethodName);
-        //第二步:获取请求报文
-        concreteSoapResponseBuilder.buildSoapRequestMessage();
-        //第三步:根据前两步操作获取到的请求参数报文，发送soap请求，从而得到响应报文
-        concreteSoapResponseBuilder.buildSoapResponseMessage();
-        return concreteSoapResponseBuilder.build();
+        String soapResponseMessage = "";
+        try {
+            //第一步:注册并预处理参数
+            concreteSoapResponseBuilder.registerGlobalParams(requestSource,targetMethodName);
+            //第二步:获取请求报文
+            concreteSoapResponseBuilder.buildSoapRequestMessage();
+            //第三步:根据前两步操作获取到的请求参数报文，发送soap请求，从而得到响应报文
+            concreteSoapResponseBuilder.buildSoapResponseMessage();
+            soapResponseMessage = concreteSoapResponseBuilder.build();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            //回收ThreadLocal占用的内存
+            GLOBAL_PARAMS_BUILDER.garbageCollection();
+        }
+        return soapResponseMessage;
     }
 }

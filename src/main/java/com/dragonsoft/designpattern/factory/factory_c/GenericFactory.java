@@ -5,7 +5,7 @@ package com.dragonsoft.designpattern.factory.factory_c;
  */
 public class GenericFactory {
 
-    public <T> T getInstance(Class clazz) throws Exception {
+    public <T> T getInstance(Class<T> clazz) throws Exception {
         return (T)clazz.newInstance();
     }
 }

@@ -15,4 +15,5 @@ public class HighHouseBuilder extends AbstractHouseBuilder{
     public void buildRoof() {
         System.out.println("高楼大厦屋顶有三层.......");
     }
+
 }

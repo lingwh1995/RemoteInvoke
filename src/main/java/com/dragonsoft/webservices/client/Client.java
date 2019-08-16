@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 /**
+ * maven打包注意事项:mvn assembly:assembly，否则所pom.xml依赖的第三方jar是不会被包含的
  * @author ronin
  * @version V1.0
  * @since 2019/8/12 15:06
@@ -68,8 +69,12 @@ public class Client {
        System.out.println(result);
    }
 
+    /**
+     * 调用OpenFire
+     */
    @Test
-   public void test(){
-       //final SoapResponseDirector instance = GenericsFactory.init().getInstance(SoapResponseDirector.class, new UrlSoapResponseBuilder());
+   public void fun4(){
+       String getAllOnlineUserInfo =
+               SoapUtils.getSoapResponseMessageByUrl("http://20.20.30.152:8989/OpenfireWebService?wsdl", "getAllOnlineUserInfo");
    }
 }

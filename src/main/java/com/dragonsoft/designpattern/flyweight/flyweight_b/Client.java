@@ -1,6 +1,7 @@
 package com.dragonsoft.designpattern.flyweight.flyweight_b;
 
 /**
+ * 享元模式
  * @author ronin
  * @version V1.0
  * @desc

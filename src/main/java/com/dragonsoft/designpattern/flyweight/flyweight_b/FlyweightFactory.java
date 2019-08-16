@@ -1,6 +1,8 @@
 package com.dragonsoft.designpattern.flyweight.flyweight_b;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ronin
@@ -23,7 +25,7 @@ public class FlyweightFactory {
     }
 
     /**定义一个池容器*/
-    private static HashMap<String, Flyweight> pool = new HashMap<String, Flyweight>();
+    private static Map<String, Flyweight> pool = new ConcurrentHashMap<String, Flyweight>();
 
     /**
      * 享元工厂

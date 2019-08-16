@@ -64,10 +64,8 @@ public class BasicSoapResponseBuilder extends AbstractSoapResponseBuilder{
         final Map<String, String> requestMethodParams = GLOBAL_PARAMS_BUILDER.getRequestMethodParams();
         //从全局参数构建者中获取到原始的请求报文
         final String soapMessage = GLOBAL_PARAMS_BUILDER.getSoapMessage();
-        //把原始的请求报文转换为一个Document
-        XmlUtils.transform(soapMessage);
         //处理该参数,将原始请求报文中的?替换为具体的参数
-        GLOBAL_PARAMS_BUILDER.soapMessage(XmlUtils.setMethodParamValue(targetMethodName, requestMethodParams));
+        GLOBAL_PARAMS_BUILDER.soapMessage(XmlUtils.setMethodParamValue(soapMessage,targetMethodName, requestMethodParams));
     }
 
     /**

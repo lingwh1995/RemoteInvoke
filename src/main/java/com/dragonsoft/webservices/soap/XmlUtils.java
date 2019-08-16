@@ -34,7 +34,7 @@ public class XmlUtils {
      * 把一段请求报文转换成一个文档对象,并注册资源
      * @param src soap协议格式的请求报文
      */
-    public static void transform(String src) {
+    private static void transform(String src) {
         try {
             logger.info("原始的请求报文:\n"+src);
             document = DocumentHelper.parseText(src);
@@ -93,11 +93,14 @@ public class XmlUtils {
 
     /**
      * 将参数设置到请求报文中
+     * @param soapRequestMessage 获取到的原始的请求报文
      * @param targetMethodName webservices发布方提供的接口的方法名
      * @param requestMethodParams webservices发布方提供的接口的方法需要的参数
      * @return 返回值为设置好参数的请求报文
      */
-    public static String setMethodParamValue(String targetMethodName, Map<String,String> requestMethodParams){
+    public static String setMethodParamValue(String soapRequestMessage,String targetMethodName, Map<String,String> requestMethodParams){
+        //把原始的请求报文转换为一个Document
+        transform(soapRequestMessage);
         //获取body节点
         Element soapBody = getRootElement().element("Body");
         //获取body节点下指定节点

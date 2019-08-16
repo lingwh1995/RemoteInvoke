@@ -10,7 +10,7 @@ import java.util.Map;
  *      1.注册全局参数(注册全局参数的时候会对全局参数做预处理)
  *      2.获取原始的请求报文
  *      3.获取替换过参数的请求报文
- *      4.返回构建好的响应报文,并在获取响应报文后回收ThreadLocal占用的内存
+ *      4.返回构建好的响应报文
  * <pre/>
  * @author ronin
  * @version V1.0
@@ -63,10 +63,7 @@ public abstract class AbstractSoapResponseBuilder {
      */
     protected String build(){
         //从全局参数构建者中获取到构建好的响应报文
-        final String soapMessage = GLOBAL_PARAMS_BUILDER.getSoapMessage();
-        //回收ThreadLocal占用的内存
-        GLOBAL_PARAMS_BUILDER.garbageCollection();
-        return soapMessage;
+        return GLOBAL_PARAMS_BUILDER.getSoapMessage();
     }
 
 }

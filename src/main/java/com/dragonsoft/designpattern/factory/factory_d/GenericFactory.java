@@ -13,7 +13,8 @@ public class GenericFactory {
         return GENERIC_FACTORY;
     }
 
-    public <T> T getInstance(Class clazz) throws Exception {
-        return (T)clazz.newInstance();
+    @SuppressWarnings("unchecked")
+    public <T> T getInstance(Class<T> clazz) throws Exception {
+        return clazz.newInstance();
     }
 }

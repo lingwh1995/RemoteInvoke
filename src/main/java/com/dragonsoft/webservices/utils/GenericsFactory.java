@@ -43,7 +43,7 @@ public class GenericsFactory {
         T target = null;
         try {
             if(!SINGLETON_OBJECT_POOL.containsKey(clazz.getSimpleName())){
-                target = (T)clazz.newInstance() ;
+                target = clazz.newInstance() ;
                 SINGLETON_OBJECT_POOL.put(clazz.getSimpleName(),target);
             }else {
                 target = (T)SINGLETON_OBJECT_POOL.get(clazz.getSimpleName());
